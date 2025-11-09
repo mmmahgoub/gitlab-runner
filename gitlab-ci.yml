@@ -1,0 +1,16 @@
+test01:
+  stage: mytest
+  script: echo "This is my first CI"
+
+test02:
+  stage: mytest
+  script: echo "This is my test 02"
+  needs: 
+  - test01
+
+test03:
+stage: mytest
+script: echo "This is job3"
+stage:
+- mytest 
+- build
