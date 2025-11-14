@@ -1,18 +1,11 @@
-# 2. Container Name
+version: '3.8' # Specify a version at the top
+services:
+  gitlab-runner:
+    image: gitlab/gitlab-runner:latest # You need an image here
     container_name: gitlab-runner
     restart: always
     volumes:
-      # Mount the Docker socket to allow the runner to run Docker-in-Docker (dind)
       - /var/run/docker.sock:/var/run/docker.sock
-      
-      # Mount the configuration directory for persistent configuration
       - /srv/gitlab-runner/config:/etc/gitlab-runner
-    
-    # 5. Hostname Mapping (Equivalent of --add-host)
-    # This adds an entry to the container's /etc/hosts file, ensuring (use this only when no DNS in place)
     extra_hosts:
       - "gitlab.mdx.local:172.17.0.2"
-
-# --- Next Steps ---
-# After saving this as docker-compose.yml, you can run it with:
-# docker compose up -d
